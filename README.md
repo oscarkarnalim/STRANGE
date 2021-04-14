@@ -58,11 +58,11 @@ template <assignment_root_dirpath> <programming_language> <template_path>
 ```
 
 ## Mode-1 ('pair') exclusive parameters description (sorted alphabetically):
-### <codepath1>
+### <codepath1> 
 A string representing the file path for the first code. Please use quotes if the path contains spaces.
-### <codepath2>
+### <codepath2> 
 A string representing the file path for the second code. Please use quotes if the path contains spaces.
-### <home_filepath>
+### <home_filepath> 
 A string representing the file path for home html page (i.e., the HTML page displayed before accessing the resulted page). Enter null if no such a page exists. Please use quotes if the path contains spaces. This parameter is null by default.
 ### <projectname1>
 A string representing the project name for the first code. This can be used to distinguish given code files if they share the same name. This is assigned to <codepath1> by default.
