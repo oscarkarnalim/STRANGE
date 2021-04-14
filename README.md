@@ -1,6 +1,6 @@
 # STRANGE
 
-**STRANGE** \(Similarity TRacker in Academia with Natural lanGuage Explanation\) is a tool for observing similarities and the surface differences among Java/Python source code files. For Python,  the compiler needs to be installed and the absolute path should be set in 'pythoncompilerpath.txt'. Further details can be seen in [the corresponding paper](https://doi.org/10.1109/ACCESS.2021.3073703) published on IEEE Access. You can see this guideline in Indonesian below.
+**STRANGE** \(Similarity TRacker in Academia with Natural lanGuage Explanation\) is a tool for observing similarities and the surface differences among Java/Python source code files. For Python,  the compiler needs to be installed and the absolute path should be set in 'pythoncompilerpath.txt'. Further details can be seen in [the corresponding paper](https://doi.org/10.1109/ACCESS.2021.3073703) published in IEEE Access. You can see this guideline in Indonesian below.
 
 ## STRANGE Modes 
 ## 1. Pair observation
