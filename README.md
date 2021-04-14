@@ -86,4 +86,7 @@ template <assignment_root_dirpath> <programming_language> <template_path>
 
 
 ## Acknowledgments
-This tool uses [ANTLR](https://www.antlr.org/) to tokenise given programs.
+This tool uses [ANTLR](https://www.antlr.org/) to tokenise given programs, [Apache Lucene](https://lucene.apache.org/) to identify stop words, [Google Prettify](https://github.com/google/code-prettify) to display source code, [google-java-format](https://github.com/google/google-java-format) to reformat Java program, [YAPF](https://github.com/google/yapf) to reformat Python program, and [JSoup](https://jsoup.org/) to parse JPlag's index page.
+
+# Indonesian guideline for STRANGE
+In progress
