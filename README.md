@@ -59,14 +59,20 @@ template <assignment_root_dirpath> <programming_language> <template_path>
 ## Parameters description
 ### Mode-1 \('pair'\) exclusive parameters description \(sorted alphabetically\):
   *\<codepath1\>*: a string representing the file path for the first code. Please use quotes if the path contains spaces. 
+  
   *\<codepath2\>*: a string representing the file path for the second code. Please use quotes if the path contains spaces. 
+  
   *\<home_filepath\>*: a string representing the file path for home html page \(i.e., the HTML page displayed before accessing the resulted page\). Enter null if no such a page exists. Please use quotes if the path contains spaces. This parameter is null by default. 
+  
   *\<projectname1\>*: a string representing the project name for the first code. This can be used to distinguish given code files if they share the same name. This is assigned to *\<codepath1\>* by default. 
+  
   *\<projectname2\>*: a string representing the project name for the second code. This can be used to distinguish given code files if they share the same name. This is assigned to *\<codepath2\>* by default. 
+  
   *\<target_html_filepath\>*: a string representing the file path for the generated HTML. Please use quotes if the path contains spaces. 
 
 ### Mode-2 \('comp'\) exclusive parameters description \(sorted alphabetically\):
   *\<sim_threshold\>*: a floating number representing the threshold of suspicion. Only source code pairs with similarity degree greater than or equal to the threshold are displayed in the results. This is assigned with 0 by default. Value: a floating number between 0 to 1 \(inclusive\). 
+  
   *\<target_html_dirpath\>*: a string representing the directory path for the generated HTML pages. Please use quotes if the path contains spaces. 
 
 ### Mode-3 \('jplag'\) exclusive parameters description:
@@ -80,8 +86,11 @@ template <assignment_root_dirpath> <programming_language> <template_path>
 
 ### Shared parameters description \(sorted alphabetically\):
   *\<additional_keywords_path\>*: a string representing a file containing additional keywords with newline as the delimiter. Keywords with more than one token should be written by embedding spaces between the tokens. For example, 'System.out.print' should be written as 'System . out . print'. Set this parameter to null if not needed. 
+  
   *\<assignment_root_dirpath\>*: a string representing the assignment root directory. That directory should contain directories in which each of them refers to one student program and has one Java or Python code file. Please use quotes if the path contains spaces. 
+  
   *\<programming_language\>*: a constant depicting the programming language used on given source code files. Value: 'java' \(for Java\) or 'py' \(for Python\). 
+  
   *\<syntax_minimum_match_length\>*: a number depicting the lowest length of captured similar syntax code fragments. This is assigned 2 by default. Value: a positive integer. 
 
 
