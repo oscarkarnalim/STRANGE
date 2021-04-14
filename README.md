@@ -57,7 +57,7 @@ This mode removes template code from all code files in an assignment directory. 
 template <assignment_root_dirpath> <programming_language> <template_path>
 ```
 
-## Mode-1 ('pair') exclusive parameters description (sorted alphabetically):
+## Mode-1 \('pair'\) exclusive parameters description \(sorted alphabetically\): 
 ### <codepath1> 
 A string representing the file path for the first code. Please use quotes if the path contains spaces.
 ### <codepath2> 
