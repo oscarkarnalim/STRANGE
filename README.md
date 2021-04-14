@@ -56,8 +56,8 @@ This mode removes template code from all code files in an assignment directory. 
 ```
 template <assignment_root_dirpath> <programming_language> <template_path>
 ```
-
-## Mode-1 \('pair'\) exclusive parameters description \(sorted alphabetically\):
+## Parameters description
+### Mode-1 \('pair'\) exclusive parameters description \(sorted alphabetically\):
   *\<codepath1\>*: a string representing the file path for the first code. Please use quotes if the path contains spaces.
   *\<codepath2\>*: a string representing the file path for the second code. Please use quotes if the path contains spaces.
   *\<home_filepath\>*: a string representing the file path for home html page \(i.e., the HTML page displayed before accessing the resulted page\). Enter null if no such a page exists. Please use quotes if the path contains spaces. This parameter is null by default.
@@ -65,20 +65,20 @@ template <assignment_root_dirpath> <programming_language> <template_path>
   *\<projectname2\>*: a string representing the project name for the second code. This can be used to distinguish given code files if they share the same name. This is assigned to *\<codepath2\>* by default.
   *\<target_html_filepath\>*: a string representing the file path for the generated HTML. Please use quotes if the path contains spaces.
 
-## Mode-2 \('comp'\) exclusive parameters description \(sorted alphabetically\):
+### Mode-2 \('comp'\) exclusive parameters description \(sorted alphabetically\):
   *\<sim_threshold\>*: a floating number representing the threshold of suspicion. Only source code pairs with similarity degree greater than or equal to the threshold are displayed in the results. This is assigned with 0 by default. Value: a floating number between 0 to 1 \(inclusive\).
   *\<target_html_dirpath\>*: a string representing the directory path for the generated HTML pages. Please use quotes if the path contains spaces.
 
-## Mode-3 \('jplag'\) exclusive parameters description:
+### Mode-3 \('jplag'\) exclusive parameters description:
   *\<jplag_root_dirpath\>*: a string representing the directory path of JPlag result. Please use quotes if the path contains spaces.
 
-## Mode-4 \('group'\) exclusive parameters description:
+### Mode-4 \('group'\) exclusive parameters description:
   *\<name_pattern\>*: a string representing the name pattern of a sub-assignment, written as Java regular expression. Please use quotes if the path contains spaces.
 
-## Mode-6 \('template'\) exclusive parameters description:
+### Mode-6 \('template'\) exclusive parameters description:
   *\<template_path\>*: a string representing a file containing template code that will be removed. The template code should be written in compliance to the programming language's syntax.
 
-## Shared parameters description \(sorted alphabetically\):
+### Shared parameters description \(sorted alphabetically\):
   *\<additional_keywords_path\>*: a string representing a file containing additional keywords with newline as the delimiter. Keywords with more than one token should be written by embedding spaces between the tokens. For example, 'System.out.print' should be written as 'System . out . print'. Set this parameter to null if not needed.
   *\<assignment_root_dirpath\>*: a string representing the assignment root directory. That directory should contain directories in which each of them refers to one student program and has one Java or Python code file. Please use quotes if the path contains spaces.
   *\<programming_language\>*: a constant depicting the programming language used on given source code files. Value: 'java' \(for Java\) or 'py' \(for Python\).
