@@ -57,7 +57,7 @@ This mode removes template code from all code files in an assignment directory. 
 template <assignment_root_dirpath> <programming_language> <template_path>
 ```
 ## Parameters description
-### Mode-1 \('pair'\) exclusive parameters description \(sorted alphabetically\):
+### Mode-1 \('pair'\) exclusive parameters description
   *\<codepath1\>*: a string representing the file path for the first code. Please use quotes if the path contains spaces. 
   
   *\<codepath2\>*: a string representing the file path for the second code. Please use quotes if the path contains spaces. 
@@ -70,21 +70,21 @@ template <assignment_root_dirpath> <programming_language> <template_path>
   
   *\<target_html_filepath\>*: a string representing the file path for the generated HTML. Please use quotes if the path contains spaces. 
 
-### Mode-2 \('comp'\) exclusive parameters description \(sorted alphabetically\):
+### Mode-2 \('comp'\) exclusive parameters description
   *\<sim_threshold\>*: a floating number representing the threshold of suspicion. Only source code pairs with similarity degree greater than or equal to the threshold are displayed in the results. This is assigned with 0 by default. Value: a floating number between 0 to 1 \(inclusive\). 
   
   *\<target_html_dirpath\>*: a string representing the directory path for the generated HTML pages. Please use quotes if the path contains spaces. 
 
-### Mode-3 \('jplag'\) exclusive parameters description:
+### Mode-3 \('jplag'\) exclusive parameters description
   *\<jplag_root_dirpath\>*: a string representing the directory path of JPlag result. Please use quotes if the path contains spaces.
 
-### Mode-4 \('group'\) exclusive parameters description:
+### Mode-4 \('group'\) exclusive parameters description
   *\<name_pattern\>*: a string representing the name pattern of a sub-assignment, written as Java regular expression. Please use quotes if the path contains spaces.
 
-### Mode-6 \('template'\) exclusive parameters description:
+### Mode-6 \('template'\) exclusive parameters description
   *\<template_path\>*: a string representing a file containing template code that will be removed. The template code should be written in compliance to the programming language's syntax.
 
-### Shared parameters description \(sorted alphabetically\):
+### Shared parameters description
   *\<additional_keywords_path\>*: a string representing a file containing additional keywords with newline as the delimiter. Keywords with more than one token should be written by embedding spaces between the tokens. For example, 'System.out.print' should be written as 'System . out . print'. Set this parameter to null if not needed. 
   
   *\<assignment_root_dirpath\>*: a string representing the assignment root directory. That directory should contain directories in which each of them refers to one student program and has one Java or Python code file. Please use quotes if the path contains spaces. 
@@ -98,7 +98,7 @@ template <assignment_root_dirpath> <programming_language> <template_path>
 This tool uses [ANTLR](https://www.antlr.org/) to tokenise given programs, [Apache Lucene](https://lucene.apache.org/) to identify stop words, [Google Prettify](https://github.com/google/code-prettify) to display source code, [google-java-format](https://github.com/google/google-java-format) to reformat Java code, [YAPF](https://github.com/google/yapf) to reformat Python code, and [JSoup](https://jsoup.org/) to parse JPlag's index page.
 
 # Indonesian guideline for STRANGE
-**STRANGE** \(Similarity TRacker in Academia with Natural lanGuage Explanation\) adalah sebuah kakas untuk mengamati kesamaan dan perbedaan level permukaan dari kode sumber Java/Python. Untuk Python, kompilernya perlu diinstall dan path absolutnya harus diset di 'pythoncompilerpath.txt'.
+**STRANGE** \(Similarity TRacker in Academia with Natural lanGuage Explanation\) adalah sebuah kakas untuk mengamati kesamaan dan perbedaan level permukaan dari kode sumber Java/Python. Untuk Python, kompilernya perlu diinstall dan path absolutnya harus diset di 'pythoncompilerpath.txt'. Detail lebih jauh dapat dilihat di [artikel terkait](https://doi.org/10.1109/ACCESS.2021.3073703) yang dipublikasikan di IEEE Access. You can see this guideline in English above.
 
 
 ## Mode STRANGE
@@ -163,4 +163,41 @@ Menghapus kode template dari setiap file kode di direktori tugas. Mode ini mener
 templatei <assignment_root_dirpath> <programming_language> <template_path>
 ```
 
+
+## Deskripsi parameter 
+### Deskripsi parameter ekslusif mode-1 ('pairi')
+  *\<codepath1\>*: string berisi path file kode pertama. Mohon gunakan kutip jika path mengandung spasi.
+  
+  *\<codepath2\>*: string berisi path file kode kedua. Mohon gunakan kutip jika path mengandung spasi.
+  
+  *\<home_filepath\>*: string berisi path file dari laman html utama (laman yang ditampilkan sebelum mengakses laman hasil). Isi dengan null jika tidak ada laman utama. Mohon gunakan kutip jika path mengandung spasi. Parameter ini diisi null secara otomatis.
+  
+  *\<projectname1\>*: string berisi nama proyek untuk kode pertama. Ini dapat digunakan untuk membedakan kode dengan nama file sama. Parameter ini diisi dengan *\<codepath1\>* secara otomatis.
+  
+  *\<projectname2\>*: string berisi nama proyek untuk kode kedua. Ini dapat digunakan untuk membedakan kode dengan nama file sama. Parameter ini diisi dengan *\<codepath2\>* secara otomatis.
+  
+  *\<target_html_filepath\>*: string berisi path file untuk lokasi laman hasil. Mohon gunakan kutip jika path mengandung spasi.
+
+### Deskripsi parameter eksklusif mode-2 ('compi')
+  *\<sim_threshold\>*: bilangan riil yang menyatakan batas minimum kesamaan dalam mencurigai pasangan kode sumber. Pasangan dengan kesamaan melebihi atau sama dengan batas akan ditampilkan di laman luaran. Parameter ini diisi 0 secara otomatis. Nilai: bilangan riil diantara 0 hingga 1 secara inclusif.
+  
+  *\<target_html_dirpath\>*: string berisi path direktori untuk lokasi direktori hasil. Mohon gunakan kutip jika path mengandung spasi.
+
+### Deskripsi parameter eksklusif mode-3 ('jplagi')
+  *\<jplag_root_dirpath\>*: string berisi path direktori hasil luaran JPlag. Mohon gunakan kutip jika path mengandung spasi.
+
+### Deskripsi parameter eksklusif mode-4 ('groupi')
+  *\<name_pattern\>*: string berisi pola nama dari satu upa tugas, ditulis mengikuti kaidah regular expression Java. Mohon gunakan kutip jika pola mengandung spasi.
+
+### Deskripsi parameter eksklusif mode-6 ('templatei')
+  *\<template_path\>*: string berisi path file untuk kode template yang akan dibuang. Kode template dituliskan sesuai dengan sintaks bahasa pemrograman yang digunakan.
+
+### Deskripsi parameter lainnya
+  *\<additional_keywords_path\>*: string berisi path file untuk kata kunci pemrograman tambahan dengan baris baru sebagai pemisah kata kunci. Kata kunci yang melibatkan lebih dari satu token harus ditulis dalam satu baris dengan spasi sebagai pemisah antar token. Sebagai contoh, 'System.out.print' dapat ditulis sebagai 'System . out . print'. Isi parameter ini dengan null jika tidak diperlukan.
+  
+  *\<assignment_root_dirpath\>*: string berisi path direktori dari kumpulan program. Direktori harus berisi beberapa sub-direktori; setiap sub-direktori berisi satu kode sumber dalam bahasa Java atau Python. Mohon gunakan kutip jika path mengandung spasi.
+  
+  *\<programming_language\>*: konstanta menyatakan bahasa pemrograman kode sumber yang akan diproses. Nilai: java (untuk Java) atau py (untuk Python).
+  
+  *\<syntax_minimum_match_length\>*: bilangan bulat menyatakan panjang minimum dari sekuens token sama yang akan dikenali oleh sistem. Parameter ini diisi dengan dua secara otomatis. Nilai: bilangan bulat positif.
 
