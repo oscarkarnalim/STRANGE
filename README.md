@@ -95,7 +95,7 @@ template <assignment_root_dirpath> <programming_language> <template_path>
 
 
 ## Acknowledgments
-This tool uses [ANTLR](https://www.antlr.org/) to tokenise given programs, [Apache Lucene](https://lucene.apache.org/) to identify stop words, [Google Prettify](https://github.com/google/code-prettify) to display source code, [google-java-format](https://github.com/google/google-java-format) to reformat Java code, [YAPF](https://github.com/google/yapf) to reformat Python code, and [JSoup](https://jsoup.org/) to parse JPlag's index page.
+This tool uses [ANTLR](https://www.antlr.org/) to tokenise given programs, [Apache Lucene](https://lucene.apache.org/) to identify stop words, [Google Prettify](https://github.com/google/code-prettify) to display source code, [google-java-format](https://github.com/google/google-java-format) to reformat Java code, [YAPF](https://github.com/google/yapf) to reformat Python code, and [JSoup](https://jsoup.org/) to parse JPlag's index page. It also adapts [arunjeyapal's implementation of RKR-GST](https://github.com/arunjeyapal/GreedyStringTiling).
 
 # Indonesian guideline for STRANGE
 **STRANGE** \(Similarity TRacker in Academia with Natural lanGuage Explanation\) adalah sebuah kakas untuk mengamati kesamaan dan perbedaan level permukaan dari kode sumber Java/Python. Untuk Python, kompilernya perlu diinstall dan path absolutnya harus diset di 'pythoncompilerpath.txt'. Detail lebih jauh dapat dilihat di [artikel terkait](https://doi.org/10.1109/ACCESS.2021.3073703) yang dipublikasikan di IEEE Access. You can see this guideline in English above.
