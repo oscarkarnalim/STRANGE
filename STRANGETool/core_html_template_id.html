@@ -1,0 +1,291 @@
+<html>
+	<head>
+		<title> Hasil kesamaan dari @filename </title>
+		<link rel="icon" href="strange_html_layout_additional_files/icon.png">
+		<script>
+			// sort table content. Copied and modified from https://www.w3schools.com/howto/howto_js_sort_table.asp
+			function sortTable(n, tableId, isNumber, tableContainerId) {
+				var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+				table = document.getElementById(tableId);
+				switching = true;
+				// Set the sorting direction to ascending:
+				dir = "asc";
+				/* Make a loop that will continue until
+				no switching has been done: */
+				while (switching) {
+					// Start by saying: no switching is done:
+					switching = false;
+					rows = table.rows;
+					/* Loop through all table rows */
+					for (i = 0; i < (rows.length - 1); i++) {
+						// Start by saying there should be no switching:
+						shouldSwitch = false;
+						/* Get the two elements you want to compare,
+						one from current row and one from the next: */
+						x = rows[i].getElementsByTagName("TD")[n];
+						y = rows[i + 1].getElementsByTagName("TD")[n];
+						if(n==0){
+							/*
+							* the column content is encapsulated with a link and can provide confusing result
+							* as the <A> tag is considered in comparison
+							*/
+							x = x.getElementsByTagName("A")[0];
+							y = y.getElementsByTagName("A")[0];
+						}
+						/* Check if the two rows should switch place,
+						based on the direction, asc or desc: */
+						if (dir == "asc") {
+							if(isNumber == true){
+								numx = Number(x.innerHTML.split(" ")[0]);
+								numy = Number(y.innerHTML.split(" ")[0]);
+								if (numx > numy ){
+									// If so, mark as a switch and break the loop:
+									shouldSwitch = true;
+									break;
+								}
+							}else{
+								if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+									// If so, mark as a switch and break the loop:
+									shouldSwitch = true;
+									break;
+								}
+							}
+						} else if (dir == "desc") {
+							if(isNumber == true){
+								numx = Number(x.innerHTML.split(" ")[0]);
+								numy = Number(y.innerHTML.split(" ")[0]);
+								if (numx < numy ){
+									// If so, mark as a switch and break the loop:
+									shouldSwitch = true;
+									break;
+								}
+							}else{
+								if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+									// If so, mark as a switch and break the loop:
+									shouldSwitch = true;
+									break;
+								}
+							}
+						}
+					}
+					if (shouldSwitch) {
+						/* If a switch has been marked, make the switch
+						and mark that a switch has been done: */
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+						// Each time a switch is done, increase this count by 1:
+						switchcount ++;
+					} else {
+						/* If no switching has been done AND the direction is "asc",
+						set the direction to "desc" and run the while loop again. */
+						if (switchcount == 0 && dir == "asc") {
+							dir = "desc";
+							switching = true;
+						}
+					}
+				}
+				recolorTableContent(tableId);
+				recolorCodeFragment(previousRowId,"rgba(60,200,246,1)");
+			}
+
+			function recolorTableContent(tableId){
+				table = document.getElementById(tableId);
+				rows = table.rows;
+				/* Loop through all table rows */
+				for (i = 0; i < rows.length; i++) {
+					if(i%2 == 0){
+						rows[i].style.backgroundColor = "rgba(255,255,255,1)";
+					}else {
+						rows[i].style.backgroundColor = "#eeeeee";
+					}
+				}
+			}
+
+			var previousRowId = null;
+			function selectRow(id, tableId){
+				if(previousRowId != null){
+					// for header table, recolor the contents
+					recolorTableContent(tableId);
+				}
+				// for header table, recolor the row
+				recolorCodeFragment(id,"rgba(60,200,246,1)");
+				previousRowId= id;
+			}
+
+			// recolor a code fragment with its following rows
+			function recolorCodeFragment(id, defaultColour){
+				document.getElementById(id).style.backgroundColor = defaultColour;
+			}
+		</script>
+		<style>
+			body{
+				font-family: "Times New Roman", Times, serif;
+				font-size: 12px;
+			}
+			a{
+				text-decoration: none;
+				color: black;
+			}
+
+			/* for table, copied and modified from https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro*/
+			div.tablecontainer{
+				float:left;
+				width: 100%;
+			}
+			table {
+				width:100%;
+			  font-family: inherit;
+				font-size: inherit;
+			  border-collapse: collapse;
+			}
+			td, th {
+			  border: 1px solid #dddddd;
+			  text-align: center;
+			}
+			td{
+				width:17%;
+				padding: 2px;
+			}
+			th{
+				border-top: none;
+				background-color: rgba(0,140,186,1);
+				color: white;
+				padding: 4px 8px;
+				text-align: center;
+				text-decoration: none;
+				font-weight: normal;
+				width:17%;
+				height:100%;
+				cursor: pointer;
+			}
+			tr:nth-child(even) {
+			  background-color: #eeeeee;
+			}
+			tr{
+				cursor: pointer;
+			}
+			
+			/* copied and modified from https://www.w3schools.com/css/css3_buttons.asp */
+			button {
+				background-color: rgba(0,140,186,1);
+				border: none;
+				color: white;
+				padding: 2px 4px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				cursor: pointer;
+			}
+
+			div.column{
+				float:left;
+				width:49%;
+				margin-right:1%;
+			}
+
+			div.info{
+				float:left;
+				width: 100%;
+				margin-right:1%;
+				margin-bottom: 10px;
+			}
+			div.title, div.infotitle{
+				float:left;
+				font-size: 14px;
+				font-weight: bold;
+				margin-right:1%;
+				margin-bottom:2px;
+			}
+			div.title{
+				margin-left:3%;
+				width:30%;
+			}
+			div.infotitle{
+				width:100%;
+				height:3%;
+			}
+			div.content{
+				float:left;
+				font-size: 14px;
+				width:51%;
+				margin-bottom:2px;
+				word-wrap: break-word;
+			}
+
+			div.explanation, div.about{
+				float:left;
+				width: 99%;
+				height:48%;
+				border: 1px solid #dddddd;
+				padding:1%;
+			}
+			#abouttitle{
+				margin-top:2%;
+			}
+			div.about{
+				height:21%;
+			}
+			
+			div.image{
+				float:left;
+				width:15%;
+			}
+			img{
+				width:100%;
+			}
+			img.sortpic{
+				float:right;
+				width:12px;
+				margin-bottom:0px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="column">
+			<div class="info">
+				<div class="image"><img src="strange_html_layout_additional_files/logo.png" alt="logo"></div>
+				<div class="title">Direktori tugas:</div>
+				<div class="content">@filepath</div>
+				<div class="title">Batas kesamaan:</div>
+				<div class="content">@threshold %</div>
+				<div class="title">Pasangan kode mencurigakan:</div>
+				<div class="content">@numsuspected</div>
+			</div>
+			<div class="infotitle"> Hasil kesamaan: </div>
+			<div class="tablecontainer">
+				<table class="header">
+					<tr>
+						<th onclick="sortTable(0,'sumtablecontent',false, 'sumcontainer')">Pasangan kode <img class="sortpic" src="strange_html_layout_additional_files/sort icon.png" alt="logo"></th>
+						<th onclick="sortTable(1,'sumtablecontent',true, 'sumcontainer')">Avg sintaks <img class="sortpic" src="strange_html_layout_additional_files/sort icon.png" alt="logo"></th>
+						<th onclick="sortTable(2,'sumtablecontent',true, 'sumcontainer')">Max sintaks <img class="sortpic" src="strange_html_layout_additional_files/sort icon.png" alt="logo"></th>
+						<th onclick="sortTable(3,'sumtablecontent',true, 'sumcontainer')">Avg komentar <img class="sortpic" src="strange_html_layout_additional_files/sort icon.png" alt="logo"></th>
+						<th onclick="sortTable(4,'sumtablecontent',true, 'sumcontainer')">Max komentar <img class="sortpic" src="strange_html_layout_additional_files/sort icon.png" alt="logo"></th>
+						<th> Aksi </th>
+					</tr>
+				</table>
+				<table id="sumtablecontent">
+@tablecontent
+				</table>
+			</div>
+		</div>
+		<div class="column">
+			<div class="infotitle"> Penjelasan metrik: </div>
+			<div class="explanation">
+@explanation
+			</div>
+			<div class="infotitle" id="abouttitle"> Tentang kami: </div>
+			<div class="about">
+				<ol>
+				<li>Laman HTML ini dihasilkan oleh <b>STRANGE</b> (<b>S</b>imilarity <b>TR</b>acker in <b>A</b>cademia with <b>N</b>atural lan<b>G</b>uage <b>E</b>xplanation),
+					sebuah kakas untuk mengamati kesamaan kode sumber Java/Python.
+				<li> STRANGE dapat digunakan sebagai aplikasi mandiri atau sebagai kakas terintegrasi dalam kakas lain (dengan akses dari perintah command prompt). STRANGE dapat diunduh di <b><u><a href="#">repositori ini</a></u></b>.
+					Sebagai alternatif, anda dapat mengirimkan email permintaan ke <b>Oscar Karnalim</b> (<b><u><a href="mailto:oscar.karnalim@uon.edu.au">email ini</a></u></b> atau <b><u><a href="mailto:oscar.karnalim@it.maranatha.edu">email itu</a></u></b>).</li>
+				<li>Kakas ini dapat juga digunakan untuk memodifikasi hasil keluaran <b><u><a href="https://github.com/jplag/jplag">JPlag</a></u></b>; detil mekanisme modifikasi dapat dilihat <b><u><a href="#">disini</a></u></b>.</li>
+				<li>Jika anda ingin mensitasi kakasi ini (atau beberapa bagiannya), mohon untuk mensitasi <b><u><a href="#">publikasi ini</a></u></b>. </li>
+				</ol>
+			</div>
+		</div>
+
+	</body>
+</html>
