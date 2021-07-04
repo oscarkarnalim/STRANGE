@@ -17,20 +17,34 @@ public class Main {
 		execute(args);
 	}
 
-	private static String python_compiler_path_file = "pythoncompilerpath.txt";
+	private static String static_setting_path_file = "static_setting.txt";
 	private static String pair_template_path = "pair_html_template.html";
 	private static String pair_template_path_id = "pair_html_template_id.html";
 	private static String comparison_template_path = "core_html_template.html";
 	private static String comparison_template_path_id = "core_html_template_id.html";
 	private static String additional_dir_path = "strange_html_layout_additional_files";
+	
+	// for RKRGST comparison, assigned as true by default
+	private static boolean isRKRGSTOptimised = true;
 
 	public static void execute(String[] args) throws Exception {
-		// get the path of Python compiler from python_compiler_path_file
-		File f = new File(python_compiler_path_file);
+		
+		// get all static settings onboard
+		File f = new File(static_setting_path_file);
 		if (f.exists()) {
 			try {
 				Scanner sc = new Scanner(f);
-				PythonCodeFormatter.pythonCompilerPath = sc.nextLine();
+				while(sc.hasNextLine()) {
+					String s = sc.nextLine();
+					if(s.startsWith("python_compiler_path===")) {
+						// get the path of Python compiler
+						PythonCodeFormatter.pythonCompilerPath = s.split("===")[1];
+					}else if(s.startsWith("RKRGST_optimised===")) {
+						// check whether RKRGST is optimised
+						isRKRGSTOptimised = Boolean.parseBoolean(s.split("===")[1]);
+					}
+				}
+				
 				sc.close();
 			} catch (Exception e) {
 				// do nothing
@@ -81,6 +95,10 @@ public class Main {
 				System.err.println("Jalankan aplikasi dengan 'bantuan' sebagai argumen untuk menampilkan bantuan.");
 			}
 		}
+	}
+	
+	public static boolean isRKRGSTOptimised() {
+		return isRKRGSTOptimised;
 	}
 
 	private static boolean executeTemplateRemoval(String[] args) throws Exception {

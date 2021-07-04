@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import p3.Main;
+
 // adapted from https://github.com/arunjeyapal/GreedyStringTiling
 public class GreedyStringTiling {
 
@@ -26,8 +28,7 @@ public class GreedyStringTiling {
 	}
 
 	/*
-	 * Returns similarity value for token of text A and B using average
-	 * similarity
+	 * Returns similarity value for token of text A and B using average similarity
 	 */
 	public static double calcAverageSimilarity(ArrayList<GSTMatchTuple> tiles) {
 		double similarity = ((double) (2 * coverage(tiles)) / (double) (P.length + T.length));
@@ -37,21 +38,17 @@ public class GreedyStringTiling {
 	}
 
 	/*
-	 * Returns similarity value for token of text A and B using maximum
-	 * similarity
+	 * Returns similarity value for token of text A and B using maximum similarity
 	 */
 	public static double calcMaximumSimilarity(ArrayList<GSTMatchTuple> tiles) {
-		double similarity = ((double) coverage(tiles) / (double) Math.min(
-				P.length, T.length));
+		double similarity = ((double) coverage(tiles) / (double) Math.min(P.length, T.length));
 		if (P.length == 0 || T.length == 0)
 			similarity = 0;
 		return similarity;
 	}
 
-	public static double calcMaximumSimilarityWithPenalty(
-			ArrayList<GSTMatchTuple> tiles) {
-		double similarity = ((double) (coverage(tiles) - tiles.size() + 1) / (double) Math
-				.min(P.length, T.length));
+	public static double calcMaximumSimilarityWithPenalty(ArrayList<GSTMatchTuple> tiles) {
+		double similarity = ((double) (coverage(tiles) - tiles.size() + 1) / (double) Math.min(P.length, T.length));
 		return similarity;
 	}
 
@@ -68,8 +65,8 @@ public class GreedyStringTiling {
 	}
 
 	// get matched tiles
-	public static ArrayList<GSTMatchTuple> getMatchedTiles(Object[] s1,
-			Object[] s2, int minimalMatchingLength) {
+	public static ArrayList<GSTMatchTuple> getMatchedTiles(Object[] s1, Object[] s2, int minimalMatchingLength) {
+
 		P = s1;
 		T = s2;
 		// renew all data structure needed
@@ -80,6 +77,14 @@ public class GreedyStringTiling {
 		markedP = new boolean[P.length];
 		// starting from the largest and then divided by two per iteration
 		int s = P.length;
+
+		/*
+		 * if RKRGST is optimised, s will be assigned with minimal matching length. This
+		 * will make the loop below only runs one iteration.
+		 */
+		if (Main.isRKRGSTOptimised())
+			s = minimalMatchingLength;
+
 		while (s >= minimalMatchingLength) {
 			scanpattern(s);
 			markStrings(s, tiles);
@@ -88,12 +93,12 @@ public class GreedyStringTiling {
 		return tiles;
 	}
 
-	public static ArrayList<GSTMatchTuple> getMatchedTilesWithRemainingUnmatchedRegion(
-			Object[] s1, Object[] s2, int minimalMatchingLength) {
+	public static ArrayList<GSTMatchTuple> getMatchedTilesWithRemainingUnmatchedRegion(Object[] s1, Object[] s2,
+			int minimalMatchingLength) {
 		/*
-		 * This method works similarly as getMatchedTiles except that it should
-		 * be executed right after that method and will check the remaining
-		 * unmatched regions. The only difference is that it relies on used marker.
+		 * This method works similarly as getMatchedTiles except that it should be
+		 * executed right after that method and will check the remaining unmatched
+		 * regions. The only difference is that it relies on used marker.
 		 */
 		P = s1;
 		T = s2;
@@ -101,6 +106,14 @@ public class GreedyStringTiling {
 		ArrayList<GSTMatchTuple> tiles = new ArrayList<GSTMatchTuple>();
 		matchList = new ArrayList<Queue<GSTMatchTuple>>();
 		int s = P.length;
+		
+		/*
+		 * if RKRGST is optimised, s will be assigned with minimal matching length. This
+		 * will make the loop below only runs one iteration.
+		 */
+		if (Main.isRKRGSTOptimised())
+			s = minimalMatchingLength;
+		
 		while (s >= minimalMatchingLength) {
 			scanpattern(s);
 			markStrings(s, tiles);
@@ -110,8 +123,8 @@ public class GreedyStringTiling {
 	}
 
 	/*
-	 * Scans the pattern and text string lists for matches. All matches found
-	 * are stored in a list of matches in queues.
+	 * Scans the pattern and text string lists for matches. All matches found are
+	 * stored in a list of matches in queues.
 	 */
 	private static void scanpattern(int s) {
 		Queue<GSTMatchTuple> queue = new LinkedList<GSTMatchTuple>();
@@ -186,10 +199,8 @@ public class GreedyStringTiling {
 						if (newsb.toString().equals(substring)) {
 							// if match, starting from s, search longest unmarked sequence
 							int k = s;
-							while (p + k < P.length && tt + k < T.length
-									&& P[p + k].equals(T[tt + k])
-									&& markedP[p + k] == false
-									&& markedT[tt + k] == false)
+							while (p + k < P.length && tt + k < T.length && P[p + k].equals(T[tt + k])
+									&& markedP[p + k] == false && markedT[tt + k] == false)
 								k = k + 1;
 							// put to the queue
 							GSTMatchTuple mv = new GSTMatchTuple(p, tt, k);
@@ -227,8 +238,8 @@ public class GreedyStringTiling {
 	}
 
 	/*
-	 * Creates a Karp-Rabin Hash Value for the given substring and returns it.
-	 * Based on: http://www-igm.univ-mlv.fr/~lecroq/string/node5.html
+	 * Creates a Karp-Rabin Hash Value for the given substring and returns it. Based
+	 * on: http://www-igm.univ-mlv.fr/~lecroq/string/node5.html
 	 */
 
 	private static int createKRHashValue(String substring) {
@@ -239,18 +250,16 @@ public class GreedyStringTiling {
 	}
 
 	/*
-	 * Returns true if the match is already occluded by another match in the
-	 * tiles list. "Note that "not occluded" is taken to mean that none of the
-	 * tokens Pp to Pp+maxmatch-1 and Tt to Tt+maxmatch-1 has been marked during
-	 * the creation of an earlier tile. However, given that smaller tiles cannot
-	 * be created before larger ones, it suffices that only the ends of each new
-	 * putative tile be testet for occlusion, rather than the whole maxmimal
-	 * match." [
+	 * Returns true if the match is already occluded by another match in the tiles
+	 * list. "Note that "not occluded" is taken to mean that none of the tokens Pp
+	 * to Pp+maxmatch-1 and Tt to Tt+maxmatch-1 has been marked during the creation
+	 * of an earlier tile. However, given that smaller tiles cannot be created
+	 * before larger ones, it suffices that only the ends of each new putative tile
+	 * be testet for occlusion, rather than the whole maxmimal match." [
 	 * "String Similarity via Greedy String Tiling and Running Karp-Rabin Matching"
 	 * http://www.pam1.bcs.uwa.edu.au/~michaelw/ftp/doc/RKR_GST.ps]
 	 */
-	private static boolean isOccluded(GSTMatchTuple match,
-			ArrayList<GSTMatchTuple> tiles) {
+	private static boolean isOccluded(GSTMatchTuple match, ArrayList<GSTMatchTuple> tiles) {
 		if (tiles.equals(null) || tiles == null || tiles.size() == 0)
 			return false;
 		for (GSTMatchTuple matches : tiles) {
@@ -269,16 +278,15 @@ public class GreedyStringTiling {
 	}
 
 	private static boolean isOverlap(int x1, int x2, int y1, int y2) {
-		return (x1 >= y1 && x1 <= y2) || (x2 >= y1 && x2 <= y2)
-				|| (y1 >= x1 && y1 <= x2) || (y2 >= x1 && y2 <= x2);
+		return (x1 >= y1 && x1 <= y2) || (x2 >= y1 && x2 <= y2) || (y1 >= x1 && y1 <= x2) || (y2 >= x1 && y2 <= x2);
 	}
 
 	/*
 	 * Returns distance to next tile, i.e. to next marked token. If no tile was
-	 * found, it returns None. case 1: there is a next tile -> pos + dist =
-	 * first marked token -> return dist case 2: there is no next tile -> pos +
-	 * dist = len(stringList) -> return None dist is also number of unmarked
-	 * token 'til next tile
+	 * found, it returns None. case 1: there is a next tile -> pos + dist = first
+	 * marked token -> return dist case 2: there is no next tile -> pos + dist =
+	 * len(stringList) -> return None dist is also number of unmarked token 'til
+	 * next tile
 	 */
 	private static int distToNextTile(int pos, boolean[] markedList) {
 		// jika sudah sampe ujung, return -1
@@ -286,8 +294,7 @@ public class GreedyStringTiling {
 			return markedList.length - pos;
 		else {
 			int dist = 0;
-			while (pos + dist + 1 < markedList.length
-					&& markedList[pos + dist + 1] == false)
+			while (pos + dist + 1 < markedList.length && markedList[pos + dist + 1] == false)
 				dist += 1;
 			if (pos + dist + 1 == markedList.length)
 				return markedList.length - pos;
@@ -297,13 +304,12 @@ public class GreedyStringTiling {
 	}
 
 	/*
-	 * Returns the first position of an unmarked token after the next tile. case
-	 * 1: -> normal case -> tile exists -> there is an unmarked token after the
-	 * tile case 2: -> tile exists -> but NO unmarked token after the tile case
-	 * 3: -> NO tile exists
+	 * Returns the first position of an unmarked token after the next tile. case 1:
+	 * -> normal case -> tile exists -> there is an unmarked token after the tile
+	 * case 2: -> tile exists -> but NO unmarked token after the tile case 3: -> NO
+	 * tile exists
 	 */
-	private static int jumpToNextUnmarkedTokenAfterTile(int pos,
-			boolean[] markedList, int dist) {
+	private static int jumpToNextUnmarkedTokenAfterTile(int pos, boolean[] markedList, int dist) {
 		pos = pos + dist;
 		while (pos + 1 < markedList.length && (markedList[pos + 1] == true))
 			pos = pos + 1;
