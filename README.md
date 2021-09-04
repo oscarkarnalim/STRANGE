@@ -3,8 +3,8 @@
 **STRANGE** \(Similarity TRacker in Academia with Natural lanGuage Explanation\) is a tool for observing similarities and the surface differences among Java/Python source code files. For Python,  the compiler needs to be installed and its command should be recognised globally in the command prompt. Otherwise, the absolute path should be set in 'static_setting.txt'. Further details can be seen in [the corresponding paper](https://doi.org/10.1109/ACCESS.2021.3073703) published in IEEE Access. You can see this guideline in Indonesian at the end of this file. The comparison algorithm (RKRGST) has been updated since its first publication for efficiency.
 
 <p align="center">
-![STRANGE's side-by-side comparison view](https://ieeexplore.ieee.org/ielx7/6287639/9312710/9405994/graphical_abstract/access-gagraphic-3073703.jpg)
- </p>
+  <img width="460" height="300" src="https://ieeexplore.ieee.org/ielx7/6287639/9312710/9405994/graphical_abstract/access-gagraphic-3073703.jpg">
+</p>
 
 ## STRANGE Modes 
 ### 1. Pair observation
