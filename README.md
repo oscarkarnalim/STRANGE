@@ -14,6 +14,10 @@ This mode captures the similarities shared between two given source code files a
 ```
 pair <codepath1> <codepath2> <programming_language> <target_html_filepath>
 ```
+*Quick execution command for linux*:
+```bash
+bash run
+```
 *Complete execution command*: 
 ```
 pair <codepath1> <codepath2> <programming_language> <target_html_filepath> <projectname1> <projectname2> <home_filepath> <syntax_minimum_match_length> <additional_keywords_path>
