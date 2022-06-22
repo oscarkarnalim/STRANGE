@@ -1,2 +1,0 @@
-python_compiler_path===python
-RKRGST_optimised===true

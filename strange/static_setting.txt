@@ -1,0 +1,2 @@
+python_compiler_path===C:\Users\oscar\AppData\Local\Programs\Python\Python38\Python.exe
+RKRGST_optimised===true
